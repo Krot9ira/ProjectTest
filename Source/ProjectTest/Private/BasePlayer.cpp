@@ -60,6 +60,7 @@ void ABasePlayer::MoveRight(float Axis)
 void ABasePlayer::Fire()
 {
 	FActorSpawnParameters Params;
+	Params.Instigator = this;
 	FVector Location = FireLocation->GetComponentLocation();
 	FRotator Rotation = FireLocation->GetComponentRotation();
 	GetWorld()->SpawnActor(Bullet, &Location, &Rotation, Params);
