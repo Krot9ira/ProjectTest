@@ -5,16 +5,16 @@
 #include "CoreMinimal.h"
 #include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
 #include "NavigationSystem.h"
-#include "GetRandomPointTask.generated.h"
+#include "FindRandomPointToGo.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PROJECTTEST_API UGetRandomPointTask : public UBTTask_BlackboardBase
+class PROJECTTEST_API UFindRandomPointToGo : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
+
 public:
 	EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory);
 };
-

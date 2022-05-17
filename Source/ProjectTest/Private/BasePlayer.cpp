@@ -54,7 +54,7 @@ void ABasePlayer::MoveRight(float Axis)
 {
 	AddMovementInput(GetActorRightVector(), Axis, false);
 }
-
+//Shooting Bullet 
 void ABasePlayer::Fire()
 {
 	if (Bullet)

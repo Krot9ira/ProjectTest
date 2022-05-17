@@ -11,10 +11,14 @@ EBTNodeResult::Type UFireTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, ui
     {
         return EBTNodeResult::Failed;
     }
+    //If controlling player call fire
     ABasePlayer* ControlledPlayer = Cast<ABaseAIController>(OwnerComp.GetAIOwner())->GetPawn<ABasePlayer>();
     if (ControlledPlayer)
     {
         ControlledPlayer->Fire();
+
+        FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+
         return EBTNodeResult::Succeeded;
     }
 	return EBTNodeResult::Failed;

@@ -16,7 +16,9 @@ EBTNodeResult::Type UBulletTrace::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
     ABasePlayer* ControlledPlayer = Cast<ABaseAIController>(OwnerComp.GetAIOwner())->GetPawn<ABasePlayer>();
     if (ControlledPlayer)
     {
+       
         FVector LaunchVector = ControlledPlayer->GetActorForwardVector();
+        //Parameters of projectile sets there
         FPredictProjectilePathParams Params;
         Params.StartLocation = ControlledPlayer->GetFireLocation();
         Params.ProjectileRadius = 5.5f;
@@ -27,7 +29,9 @@ EBTNodeResult::Type UBulletTrace::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
         Params.bTraceWithChannel = true;
         Params.bTraceWithCollision = true;
         Params.ActorsToIgnore.Add(ControlledPlayer);
+
         FPredictProjectilePathResult PathResult;
+
         UObject* WorldContextObject = GetWorld();
 
         //i - count of bouncing wich we calculating, if hit other plyer we stop task
@@ -35,9 +39,10 @@ EBTNodeResult::Type UBulletTrace::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
         {
             bool bHit = UGameplayStatics::PredictProjectilePath(WorldContextObject, Params, PathResult);
             if (bHit)
-            {
+            {   //If hit other player
                 if (Cast<ABasePlayer>(PathResult.HitResult.Actor))
                 {
+                    FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
                     return EBTNodeResult::Succeeded;
                 }
                 //bouncing calculation
