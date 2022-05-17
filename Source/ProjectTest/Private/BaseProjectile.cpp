@@ -37,3 +37,14 @@ void ABaseProjectile::Tick(float DeltaTime)
 
 }
 
+float ABaseProjectile::GetRadius()
+{
+	//if (!SphereCollision)
+	//{
+	return 0.0f;
+	//}
+	//return SphereCollision->GetScaledSphereRadius();
+}
+
+
+

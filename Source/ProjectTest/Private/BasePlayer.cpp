@@ -14,8 +14,6 @@ ABasePlayer::ABasePlayer()
 		FireLocation = CreateDefaultSubobject<USceneComponent>(TEXT("FireLocation"));
 		FireLocation->SetupAttachment(RootComponent);
 	}
-	
-
 	Score = 0;
 
 }
@@ -59,11 +57,19 @@ void ABasePlayer::MoveRight(float Axis)
 
 void ABasePlayer::Fire()
 {
-	FActorSpawnParameters Params;
-	Params.Instigator = this;
-	FVector Location = FireLocation->GetComponentLocation();
-	FRotator Rotation = FireLocation->GetComponentRotation();
-	GetWorld()->SpawnActor(Bullet, &Location, &Rotation, Params);
+	if (Bullet)
+	{
+		FActorSpawnParameters Params;
+		Params.Instigator = this;
+		FVector Location = FireLocation->GetComponentLocation();
+		FRotator Rotation = FireLocation->GetComponentRotation();
+		GetWorld()->SpawnActor(Bullet, &Location, &Rotation, Params);
+	}
+}
+
+FVector ABasePlayer::GetFireLocation()
+{
+	return FireLocation->GetComponentLocation();
 }
 
 int32 ABasePlayer::AddScore(int32 Points)

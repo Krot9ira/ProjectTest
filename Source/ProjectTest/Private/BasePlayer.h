@@ -21,16 +21,11 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadWrite, EditAnyWhere)
-	USceneComponent* FireLocation;
-
-	UPROPERTY(BlueprintReadWrite, EditAnyWhere)
-	TSubclassOf<ABaseProjectile> Bullet;
-
+		USceneComponent* FireLocation;
 	UPROPERTY(BlueprintReadOnly)
 		int32 Score;
-
-
-
+	UPROPERTY(EditAnyWhere)
+		TSubclassOf<ABaseProjectile> Bullet;
 
 public:	
 	// Called every frame
@@ -38,6 +33,7 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		class UBehaviorTree* TreeAsset;
+	
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -50,6 +46,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void Fire();
 
+	UFUNCTION(BlueprintCallable)
+		FVector GetFireLocation();
 	//Functions for interacting with protected variables
 	UFUNCTION(BlueprintCallable)
 		int32 AddScore(int32 Points);
