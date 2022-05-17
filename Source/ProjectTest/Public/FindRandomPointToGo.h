@@ -16,5 +16,7 @@ class PROJECTTEST_API UFindRandomPointToGo : public UBTTask_BlackboardBase
 	GENERATED_BODY()
 
 public:
+	UFindRandomPointToGo();
+
 	EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory);
 };

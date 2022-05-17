@@ -19,6 +19,7 @@ EBTNodeResult::Type UFireTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp, ui
 
         FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
 
+
         return EBTNodeResult::Succeeded;
     }
 	return EBTNodeResult::Failed;

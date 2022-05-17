@@ -16,7 +16,6 @@ EBTNodeResult::Type UBulletTrace::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
     ABasePlayer* ControlledPlayer = Cast<ABaseAIController>(OwnerComp.GetAIOwner())->GetPawn<ABasePlayer>();
     if (ControlledPlayer)
     {
-       
         FVector LaunchVector = ControlledPlayer->GetActorForwardVector();
         //Parameters of projectile sets there
         FPredictProjectilePathParams Params;
