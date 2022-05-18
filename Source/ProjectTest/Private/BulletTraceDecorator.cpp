@@ -7,21 +7,31 @@
 #include <ProjectTest/Public/BaseAIController.h>
 #include "Math/UnrealMathUtility.h"
 
+UBulletTraceDecorator::UBulletTraceDecorator()
+{
+	NodeName = "IsVisible";
+}
+
 bool UBulletTraceDecorator::CalculateRawConditionValue(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const
 {
+	//If enemy in direct visibility return false
     if (!OwnerComp.GetAIOwner())
     {
         return false;
     }
-    //Checking possibility to hit enemy
-    ABasePlayer* ControlledPlayer = Cast<ABaseAIController>(OwnerComp.GetAIOwner())->GetPawn<ABasePlayer>();
-    if (ControlledPlayer)
-    {
-        FCollisionQueryParams Params;
-        TArray<struct FHitResult> OutHits;
-        FCollisionShape Shape = FCollisionShape();
-        GetWorld()->SweepMultiByChannel(OutHits, ControlledPlayer->GetActorLocation(), ControlledPlayer->GetActorLocation(), FQuat(0,0,0,0), ECollisionChannel::ECC_Visibility, Shape.MakeSphere(500.0f), Params, FCollisionResponseParams::DefaultResponseParam);
-    }
+	ABasePlayer* ControlledPlayer = Cast<ABaseAIController>(OwnerComp.GetAIOwner())->GetPawn<ABasePlayer>();
+	ABasePlayer* EnemyPlayer = Cast<ABasePlayer>(OwnerComp.GetAIOwner()->GetBlackboardComponent()->GetValueAsObject("Enemy"));
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(ControlledPlayer);
+	FHitResult Hit;
+
+	GetWorld()->LineTraceSingleByChannel(Hit, ControlledPlayer->GetActorLocation(), EnemyPlayer->GetActorLocation(), ECollisionChannel::ECC_Visibility, QueryParams, FCollisionResponseParams::DefaultResponseParam);
+
+	if (Hit.Actor.Get() == EnemyPlayer)
+	{
+		
+		return false;
+	}
 
     
 

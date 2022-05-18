@@ -22,6 +22,8 @@ class PROJECTTEST_API UBulletTrace : public UBTTask_BlackboardBase
 	GENERATED_BODY()
 
 public:
+
+	UBulletTrace();
 	EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory);
 	
 };

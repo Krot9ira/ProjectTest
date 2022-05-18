@@ -13,6 +13,8 @@ UCLASS()
 class PROJECTTEST_API UBulletTraceDecorator : public UBTDecorator_BlackboardBase
 {
 	GENERATED_BODY()
+public:
+	UBulletTraceDecorator();
 
 protected:
 

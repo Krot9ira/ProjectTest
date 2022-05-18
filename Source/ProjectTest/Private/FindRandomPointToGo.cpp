@@ -17,14 +17,14 @@ EBTNodeResult::Type UFindRandomPointToGo::ExecuteTask(UBehaviorTreeComponent& Ow
     {
         return EBTNodeResult::Failed;
     }
- 
+    //Getting random reacheable point to go
     ABasePlayer* ControlledPlayer = Cast<ABaseAIController>(OwnerComp.GetAIOwner())->GetPawn<ABasePlayer>();
 
 	FNavLocation Location{};
 
     const UNavigationSystemV1* NavSystem = UNavigationSystemV1::GetCurrent(GetWorld());
 
-	NavSystem->GetRandomReachablePointInRadius(ControlledPlayer->GetActorLocation(),300.0f, Location);
+	NavSystem->GetRandomReachablePointInRadius(ControlledPlayer->GetActorLocation(),3000.0f, Location);
 
     OwnerComp.GetAIOwner()->GetBlackboardComponent()->SetValueAsVector(BlackboardKey.SelectedKeyName, Location.Location);
 

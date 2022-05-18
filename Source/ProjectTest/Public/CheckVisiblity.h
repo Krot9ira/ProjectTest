@@ -14,4 +14,8 @@ class PROJECTTEST_API UCheckVisiblity : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
 	
+public:
+	UCheckVisiblity();
+
+	EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory);
 };
